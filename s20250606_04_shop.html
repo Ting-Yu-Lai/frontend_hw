@@ -24,8 +24,8 @@
         }
 
         .audio-btn {
-            background-color:  white;
-            color:#666666;
+            background-color: white;
+            color: #666666;
             font-family: '標楷體';
             font-size: 16px;
             padding: 10px 20px;
@@ -126,6 +126,68 @@
             width: 50%;
         }
 
+        .modal {
+            display: none;
+            /* 預設隱藏 */
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            /* 半透明背景 */
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .modal-content {
+            background-color: #f0f0f0;
+            /* 淺灰色，與頁面協調 */
+            padding: 20px;
+            border-radius: 10px;
+            width: 80%;
+            max-width: 600px;
+            font-family: '標楷體';
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+        }
+
+        .modal-content h2 {
+            color: #333;
+            margin-bottom: 15px;
+        }
+
+        .modal-content ol {
+            margin-bottom: 20px;
+            padding-left: 20px;
+        }
+
+        .modal-content li {
+            margin-bottom: 10px;
+            line-height: 1.5;
+        }
+
+        .modal-content .close-btn {
+            background-color: #666666;
+            color: white;
+            font-family: '標楷體';
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            display: block;
+            margin: 0 auto;
+        }
+
+        .modal-content .close-btn:hover {
+            background-color: #4d4d4d;
+        }
+
+        /* 刪除線樣式 */
+        del {
+            color: #999;
+        }
+
         footer {
             width: 100%;
             height: 5vh;
@@ -147,6 +209,21 @@
             <source src="./music/Dazhanhongtu.mp3" type="audio/mp3">
             Your browser does not support the audio element.
         </audio>
+
+        <div id="usageModal" class="modal">
+            <div class="modal-content">
+                <h2>使用流程</h2>
+                <ol>
+                    <li><strong>開啟電腦喇叭</strong>：<br>確保您的電腦喇叭已開啟並正常運作，以便聽到背景音樂。</li>
+                    <li><strong>點選商店旁邊的啟用音頻按鈕</strong>：<br>網頁載入後，背景音樂會自動播放（初始為靜音）。在頁面頂部，找到商店旁邊的「Let's
+                        party」按鈕（灰色圓角按鈕）。點擊按鈕，即可聽到背景音樂。
+                    </li>
+                    <li><del>再次點擊可重新靜音</del>（請全程服用）。</li>
+                    <li><strong>開始沉浸式選購您的商品，總金額顯示在頁面底部，若總金額超過 500 萬，將自動應用八折折扣。瀏覽商品圖片。</li>
+                </ol>
+                <button class="close-btn" id="closeModal">確認</button>
+            </div>
+        </div>
 
         <div class="nav">
             <div class="shopcar">購物車</div>
@@ -291,6 +368,13 @@
         crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
     <script>
+        // 顯示模態對話框
+        $('#usageModal').css('display', 'flex');
+
+        // 關閉模態對話框
+        $('#closeModal').click(function () {
+            $('#usageModal').css('display', 'none');
+        });
         // function
         let tmpTotals = $('.totals');
         let sum = 0;
